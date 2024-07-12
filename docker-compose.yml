@@ -1,6 +1,8 @@
 services:
+
   pgdatabase:
     image: postgres:latest
+    restart: always
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
@@ -10,11 +12,27 @@ services:
     ports:
       - "5432:5432"
 
-  
-  pgadmin:
-    image: dpage/pgadmin4
+  data_ingester:
+    build: .
     environment:
-      - PGADMIN_DEFAULT_EMAIL=admin@email.com
-      - PGADMIN_DEFAULT_PASSWORD=root
-    ports:
-      - "8080:80" 
+      - user=root
+      - password=root
+      - host=localhost
+      - port=5432
+      - db=taxi_db
+      - table_name=taxi_table
+      - file_url='https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz'
+
+
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=admin@email.com
+  #     - PGADMIN_DEFAULT_PASSWORD=root
+  #   ports:
+  #     - "8080:80" 
+  #   volumes:
+  #     - ./data_pgadmin:/var/lib/pgadmin
+  #   depends_on:
+  #     - pgdatabase
