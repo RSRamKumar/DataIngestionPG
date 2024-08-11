@@ -101,3 +101,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     ingest_data(args)
+
+
+# To fix Autocommit error: https://github.com/sqlalchemy/sqlalchemy/issues/5405
