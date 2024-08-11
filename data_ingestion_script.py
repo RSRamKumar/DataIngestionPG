@@ -104,3 +104,4 @@ if __name__ == "__main__":
 
 
 # To fix Autocommit error: https://github.com/sqlalchemy/sqlalchemy/issues/5405
+# https://stackoverflow.com/questions/74706309/sqlalchemy-2-0-with-engine-connect-does-not-automatically-commit
